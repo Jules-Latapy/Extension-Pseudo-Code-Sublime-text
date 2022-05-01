@@ -1,0 +1,102 @@
+{
+    "scope": "source.algo",
+    "completions": [
+        {
+            "trigger": "algo...debut...fin",
+            "annotation": "fonction",
+            "contents": "algorithme ${1:name}( ${2:e/s} ${3:type} : ${4:name})\n\t${5:/*declaration*/}\ndebut\n\t${6:/*code*/}\nfin",
+            "kind": "Snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "algo",
+            "contents": "algorithme",
+            "kind": "keyword"
+        },
+        {
+            "trigger": "cons",
+            "contents": "constante:\n\t",
+            "kind": "Keyword"
+        },
+        {
+            "trigger": "var",
+            "contents": "variable:\n\t",
+            "kind": "keyword"
+        },
+        /*------------------------------Conditionnelle------------------------------*/
+        {
+            "trigger": "si...alors...fsi",
+            "annotation": "test",
+            "contents": "si ${1:/*condition*/} alors\n\t${3:/*code*/}\nfsi",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "selon...cas...fselon",
+            "annotation": "test",
+            "contents": "selon ${1:/*variable*/}\n\tcas $2 : ${3:/*code*/}\n\tautre cas $4 : ${5:/*code*/}\nfselon",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        /*------------------------------boucle------------------------------*/
+        {
+            "trigger": "repeter...jusqu'à...",
+            "annotation": "boucle1",
+            "contents": "repeter\n\t ${1:/*code*/}\njusqu'à ${2:/*condition*/}",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "tq...faire...ftq",
+            "annotation": "boucle2",
+            "contents": "tq ${1:/*condition*/} faire\n\t${2:/*code*/}\nftq",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "faire...tq...ftq",
+            "annotation": "boucle3",
+            "contents": "faire \n\t${1:/*code*/}\ntq ${2:/*condition*/} ftq",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "pour...de...à...pas..fpour",
+            "annotation": "boucle4",
+            "contents": "pour ${1:/*variable*/} de ${2:/*depart*/} à ${3:/*arrivée*/}\n\t${4:/*code*/}\nfpour",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "repeter...fois...frepeter",
+            "annotation": "boucle5",
+            "contents": "repeter ${1:/*variable*/} fois \n\t${4:/*code*/}\nfrepeter",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "racine1",
+            "annotation": "racine carré \\/¯",
+            "contents": "\\/¯",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "racine2",
+            "annotation": "racine carré √",
+            "contents": "√($1)",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        {
+            "trigger": "fois",
+            "annotation": "symbole multiplié",
+            "contents": "×",
+            "kind": "snippet",
+            "details": "A simple, non-<code>async</code> function definition"
+        },
+        /*------------------------------Type------------------------------*/
+
+        "booleen","entier","reel","caractere","chaine"
+    ]
+}

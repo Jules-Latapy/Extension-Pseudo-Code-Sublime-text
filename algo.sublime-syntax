@@ -1,0 +1,145 @@
+%YAML 1.2
+---
+name: Pseudo-Code
+file_extensions: [txt, algo]
+scope: source.algo
+
+contexts:
+  main:
+
+#####################################
+##              MATCH              ##
+#####################################
+
+##-----------------------------------------------commentaire et chaine
+    - match: '//'
+      scope: punctuation.definition.comment.algo
+      push : line_comment
+
+    - match: '/\*'
+      scope: punctuation.definition.comment.algo
+      push : block_comment
+
+    - match: '"'
+      scope: punctuation.definition.string.begin.algo
+      push :  string
+
+    - match: \'
+      scope: punctuation.definition.string.begin.algo
+      push : charactere
+##-----------------------------------------------mots de language 
+    - match: \b((?i)(algorithme|d[e,é]but|fin|retourne|appel))\b
+      scope: entity.name.tag.algo
+
+    - match: (?<=((?i)(algorithme)))(\ *)(\w+)
+      scope: entity.name.namespace.algo
+      push : fonction
+
+    - match: \b((?i)(variable|constante))\b
+      scope: entity.name.tag.algo
+##-----------------------------------------------logiques
+    - match: \b(?i)(ou|et|xou|non)\b
+      scope: keyword.control.logical.algo
+
+    - match: (=|/=|>|<)
+      scope: keyword.control.logical.algo
+##-----------------------------------------------itérations
+    - match: \b(si|sinon|fsi|alors|selon|cas|autre cas|fselon)\b
+      scope: keyword.control.conditional.algo
+
+    - match: \b(tantque|tq|ftq|faire|r[eé]p[eé]ter|fois|fr[eé]p[eé]ter|jusqu(\')[aà]|pour|(?<!]) ?de|[aà]|pas|fpour)\b
+      scope: keyword.control.conditional.algo
+##-----------------------------------------------affectation
+    - match: '<--|-->|\?'
+      scope: keyword.operator.assignment.algo
+
+    - match: '\:'
+      scope: keyword.operator.assignment.algo
+##-----------------------------------------------types
+    - match: \b((?i)(bool[eé]en|entier|r[eé]el|caract[eè]re|chaine ?de ?caract[eè]res|cha[îi]ne|tableau|nulle|(?<=]) ?de|d\' ?))\b
+      scope: storage.type.algo
+
+    - match: '\b([A-Z 0-9 _]*)\b'
+      scope: constant.language.algo
+
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.algo
+##-----------------------------------------------fonction
+    - match: '\b\w+ *(?=\()'
+      scope: variable.function.algo
+##-----------------------------------------------operateur
+    - match: '\(c\)|©|\b(mod)\b|\b(div)\b|\+|\-|\/|\*|\||√'
+      scope: punctuation.definition.annotation.algo
+
+    #nouveau symbole d'apres le cahier des charges
+    - match: '(\\/¯)|×|\^'
+      scope: punctuation.definition.annotation.algo
+##    - match: '\[|\]|\{\}'
+##      scope: constant.numeric.algo
+
+##-----------------------------------------------Autre
+    - match: ;
+      scope: invalid.illegal
+
+#######################################
+##              CONTEXT              ##
+#######################################
+
+
+##-----------------------------------------------commentaire et chaine
+
+  string:
+    - meta_scope: string.quoted.double.algo
+    - match: '\\.'
+      scope: constant.character.escape.algo
+
+    - match: '"'
+      scope: punctuation.definition.string.end.algo
+      pop  : true
+
+  charactere:
+    - meta_scope: string.quoted.double.algo
+    - match: '\\.'
+      scope: constant.character.escape.algo
+
+    - match: \'
+      scope: punctuation.definition.string.end.algo
+      pop: true
+
+    - match: ((?i)[aà])
+      scope: punctuation.definition.string.end.algo
+      pop  : true
+
+
+  line_comment:
+    - meta_scope: comment.line.algo
+    - match: $
+      pop: true
+
+  block_comment:
+    - meta_scope: comment.block.algo
+    - match: '\*/'
+      pop: true
+
+  fonction :
+    - match: '\b[e(e\/s)s]\b'
+      scope: keyword.operator.assignment.algo
+
+    - match: '(?<=(e|s))(.*)(?=(\:))'
+      scope: variable.parameter.algo
+
+#   - match: '(\[(.*)\])'
+#     scope: entity.name.tag.algo
+
+    - match: '(?<=(\:))(\ *)(\w+)'
+      scope: storage.type.algo
+
+    - match: '\:'
+      scope: keyword.operator.assignment.algo
+
+    - match: \)
+      pop  : true
+
+    - match: \b((?i)(constante|variable|algorithme|d[e,é]but))\b
+      scope: entity.name.tag.algo
+      pop  : true

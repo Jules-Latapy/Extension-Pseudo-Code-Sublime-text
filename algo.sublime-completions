@@ -4,7 +4,7 @@
         {
             "trigger": "algo...debut...fin",
             "annotation": "fonction",
-            "contents": "algorithme ${1:name}( ${2:e/s} ${3:type} : ${4:name})->${5:return_type}\n\t${6:/*declaration*/}\ndebut\n\t${7:/*code*/}\nfin",
+            "contents": "algorithme ${1:name}( ${2:e/s} ${3:param} : ${4:type})->${5:return_type}\n\t${6:/*declaration*/}\ndebut\n\t${7:/*code*/}\nfin",
             "kind": "Snippet",
             "details": "Une fonction de pseudo-code"
         },

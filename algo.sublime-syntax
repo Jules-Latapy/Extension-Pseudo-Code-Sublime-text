@@ -43,6 +43,9 @@ contexts:
 
     - match: (=|/=|>|<)
       scope: keyword.control.logical.algo
+
+    - match: \bvrai|faux\b
+      scope: constant.language.algo
 ##-----------------------------------------------itérations
     - match: \b(si|sinon|fsi|alors|selon|cas|autre cas|fselon)\b
       scope: keyword.control.conditional.algo
@@ -50,7 +53,7 @@ contexts:
     - match: \b(tantque|tq|ftq|faire|r[eé]p[eé]ter|fois|fr[eé]p[eé]ter|jusqu(\')[aà]|pour|(?<!]) ?de|[aà]|pas|fpour)\b
       scope: keyword.control.conditional.algo
 ##-----------------------------------------------affectation
-    - match: '<--|-->|\?'
+    - match: '<-|->|\?'
       scope: keyword.operator.assignment.algo
 
     - match: '\:'
@@ -71,14 +74,15 @@ contexts:
     - match: '\(c\)|©|\b(mod)\b|\b(div)\b|\+|\-|\/|\*|\||√'
       scope: punctuation.definition.annotation.algo
 
-    #les professeur utilise se symbole "\/¯" pour la racine carré
+    #nouveau symbole d'apres le cahier des charges
     - match: '(\\/¯)|×|\^'
       scope: punctuation.definition.annotation.algo
+##    - match: '\[|\]|\{\}'
+##      scope: constant.numeric.algo
 
 ##-----------------------------------------------Autre
     - match: ;
       scope: invalid.illegal
-##le symbole de terminaison de ligne n'a pas de sens dans le pseudo code étudier
 
 #######################################
 ##              CONTEXT              ##
@@ -121,10 +125,10 @@ contexts:
       pop: true
 
   fonction :
-    - match: '\b[e(e\/s)s]\b'
+    - match: '\b[e/s]\b'
       scope: keyword.operator.assignment.algo
 
-    - match: '(?<=(e|s))(.*)(?=(\:))'
+    - match: '(?<=(e|s)) (.*)(?=(\:))'
       scope: variable.parameter.algo
 
     - match: '(?<=(\:))(\ *)(\w+)'

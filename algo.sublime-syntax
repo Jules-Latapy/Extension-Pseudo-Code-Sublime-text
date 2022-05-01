@@ -71,15 +71,14 @@ contexts:
     - match: '\(c\)|©|\b(mod)\b|\b(div)\b|\+|\-|\/|\*|\||√'
       scope: punctuation.definition.annotation.algo
 
-    #nouveau symbole d'apres le cahier des charges
+    #les professeur utilise se symbole "\/¯" pour la racine carré
     - match: '(\\/¯)|×|\^'
       scope: punctuation.definition.annotation.algo
-##    - match: '\[|\]|\{\}'
-##      scope: constant.numeric.algo
 
 ##-----------------------------------------------Autre
     - match: ;
       scope: invalid.illegal
+##le symbole de terminaison de ligne n'a pas de sens dans le pseudo code étudier
 
 #######################################
 ##              CONTEXT              ##
@@ -127,9 +126,6 @@ contexts:
 
     - match: '(?<=(e|s))(.*)(?=(\:))'
       scope: variable.parameter.algo
-
-#   - match: '(\[(.*)\])'
-#     scope: entity.name.tag.algo
 
     - match: '(?<=(\:))(\ *)(\w+)'
       scope: storage.type.algo

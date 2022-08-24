@@ -2,8 +2,8 @@
     "scope": "source.algo",
     "completions": [
         {
-            "trigger": "algo...debut...fin",
-            "annotation": "fonction",
+            "trigger": "algo",
+            "annotation": "algo...debut...fin",
             "contents": "algorithme ${1:name}( ${2:e/s} ${3:param} : ${4:type})->${5:return_type}\n\t${6:/*declaration*/}\ndebut\n\t${7:/*code*/}\nfin",
             "kind": "Snippet",
             "details": "Une fonction de pseudo-code"
@@ -23,63 +23,63 @@
             "contents": "variable:\n\t",
             "kind": "keyword"
         },
+        {
+            "trigger": "debut",
+            "annotation": "debut...fin",
+            "contents": "debut\n\t${1:/*code*/}\nfin",
+            "kind": "Snippet",
+            "details": "Une bloque de pseudo-code"
+        },
         /*------------------------------Conditionnelle------------------------------*/
         {
-            "trigger": "si...alors...fsi",
-            "annotation": "test",
+            "trigger": "si",
+            "annotation": "si...alors...fsi",
             "contents": "si ${1:/*condition*/} alors\n\t${3:/*code*/}\nfsi",
             "kind": "snippet",
             "details": "raccourci pour le test"
         },
         {
-            "trigger": "selon...cas...fselon",
-            "annotation": "test",
+            "trigger": "sel",
+            "annotation": "selon...cas...fselon",
             "contents": "selon ${1:/*variable*/}\n\tcas $2 : ${3:/*code*/}\n\tautre cas $4 : ${5:/*code*/}\nfselon",
             "kind": "snippet",
             "details": "raccourci pour l'alternative"
         },
         /*------------------------------boucle------------------------------*/
         {
-            "trigger": "repeter...jusqu'à...",
-            "annotation": "boucle1",
+            "trigger": "repJ",
+            "annotation": "repeter...jusqu'à...",
             "contents": "repeter\n\t ${1:/*code*/}\njusqu'à ${2:/*condition*/}",
             "kind": "snippet",
             "details": "raccourci pour la boucle repeter"
         },
         {
-            "trigger": "tq...faire...ftq",
-            "annotation": "boucle2",
+            "trigger": "tq",
+            "annotation": "tq...faire...ftq",
             "contents": "tq ${1:/*condition*/} faire\n\t${2:/*code*/}\nftq",
             "kind": "snippet",
             "details": "raccourci pour la boucle tant que"
         },
         {
-            "trigger": "faire...tq...ftq",
-            "annotation": "boucle3",
+            "trigger": "faire",
+            "annotation": "faire...tq...ftq",
             "contents": "faire \n\t${1:/*code*/}\ntq ${2:/*condition*/} ftq",
             "kind": "snippet",
             "details": "raccourci pour la boucle faire tant que"
         },
         {
-            "trigger": "pour...de...à...pas..fpour",
-            "annotation": "boucle4",
-            "contents": "pour ${1:/*variable*/} de ${2:/*depart*/} à ${3:/*arrivée*/}\n\t${4:/*code*/}\nfpour",
+            "trigger": "pour",
+            "annotation": "pour...de...à...pas..fpour",
+            "contents": "pour ${1:/*variable*/} de ${2:/*depart*/} à ${3:/*arrivée*/} par pas de ${4:/*pas*/}\n\t${5:/*code*/}\nfpour",
             "kind": "snippet",
             "details": "raccourci pour la boucle pour"
         },
         {
-            "trigger": "repeter...fois...frepeter",
-            "annotation": "boucle5",
+            "trigger": "repF",
+            "annotation": "repeter...fois...frepeter",
             "contents": "repeter ${1:/*variable*/} fois \n\t${4:/*code*/}\nfrepeter",
             "kind": "snippet",
             "details": "raccourci pour la boucle repeter"
-        },
-        {
-            "trigger": "racine1",
-            "annotation": "racine carré \\/¯",
-            "contents": "\\/¯",
-            "kind": "snippet",
-            "details": "racine carré demandé"
         },
         {
             "trigger": "racine2",
@@ -89,7 +89,7 @@
             "details": "racine carré plus simple"
         },
         {
-            "trigger": "fois",
+            "trigger": "f",
             "annotation": "symbole multiplié",
             "contents": "×",
             "kind": "snippet",
@@ -104,6 +104,29 @@
         },
         /*------------------------------Type------------------------------*/
 
-        "booleen","entier","reel","caractere","chaine"
+        "booleen","entier","reel","caractere","chaine",
+
+        /*-----------------------------accesseurs-------------------------*/
+
+        "publique","statique","abstrait","final",
+
+        /*-----------------------------Classe-------------------------*/
+        {
+            "trigger": "class",
+            "annotation": "classe simple",
+            "contents": "classe ${1:name}\ndebut\n\t${13:/*code*/}\nfin",
+            "kind": "Snippet",
+            "details": "Une fonction de pseudo-code"
+        },
+        {
+            "trigger": "class2",
+            "annotation": "classe avec tout les accesseurs possibles",
+            "contents": "${1:publique }${2:privée }${3:statique }${4:protégée }${5:abstraite }${6:statique }${7:finale }classe ${8:name }${9:herite }${10:parent }${11:implemente }${12:interfaces}\ndebut\n\t${13:/*code*/}\nfin",
+            "kind": "Snippet",
+            "details": "Une fonction de pseudo-code"
+        },
+        /*-----------------------------appel-------------------------*/
+
+        "appel","nouveau","retourne"
     ]
 }

@@ -28,10 +28,10 @@ contexts:
       scope: punctuation.definition.string.begin.algo
       push : charactere
 ##-----------------------------------------------mots de language 
-    - match: \b((?i)(algorithme|d[e,é]but|fin|retourne|appel))\b
+    - match: \b((?i)(d[eé]but|fin|retourne|appel|nouve(au|lle)))\b
       scope: entity.name.tag.algo
 
-    - match: (?<=((?i)(algorithme)))(\ *)(\w+)
+    - match: (?<=((?i)(algorithme)))[ \t\n]*(\w+)
       scope: entity.name.namespace.algo
       push : fonction
 
@@ -41,16 +41,16 @@ contexts:
     - match: \b(?i)(ou|et|xou|non)\b
       scope: keyword.control.logical.algo
 
-    - match: (=|/=|>|<)
+    - match: (=|/=|≠|>|<)
       scope: keyword.control.logical.algo
 
-    - match: \bvrai|faux\b
+    - match: \bvrai|faux|nulle\b
       scope: constant.language.algo
 ##-----------------------------------------------itérations
     - match: \b(si|sinon|fsi|alors|selon|cas|autre cas|fselon)\b
       scope: keyword.control.conditional.algo
 
-    - match: \b(tantque|tq|ftq|faire|r[eé]p[eé]ter|fois|fr[eé]p[eé]ter|jusqu(\')[aà]|pour|(?<!]) ?de|[aà]|pas|fpour)\b
+    - match: \b(?i)(tantque|tq|ftq|faire|r[eé]p[eé]ter|fois|fr[eé]p[eé]ter|jusqu(\')[aà]|pour|(?<!]) ?de|[aà]|pas|par|fpour)\b
       scope: keyword.control.conditional.algo
 ##-----------------------------------------------affectation
     - match: '<-|->|\?'
@@ -58,31 +58,56 @@ contexts:
 
     - match: '\:'
       scope: keyword.operator.assignment.algo
+
+    - match: '(?<=(\:))[ \t\n]*(\w+)'
+      scope: storage.type.algo
+
+    - match: '(?<=(->))[ \t\n]*(\w+)'
+      scope: storage.type.algo
+##-----------------------------------------------operateur
+    - match: '(?i)\(c\)|©|\b(mod)\b|\b(div)\b|\+|\-|\/|\*|\||√'
+      scope: punctuation.definition.annotation.algo
+
+    - match: '×|\^'
+      scope: punctuation.definition.annotation.algo
+##-----------------------------------------------fonction
+    - match: '\b\w+[ \t\n]*(?=\()'
+      scope: variable.function.algo
+##-----------------------------------------------Objet
+    - match: '(?<=(?i)(classe))[ \t\n]*(\w+)'
+      scope: entity.name.class.algo
+
+    - match: \b(?i)(algorithme|methode|constructeur|classe|interface)\b
+      scope: entity.name.tag.algo
+      #storage.type #devrait etre celui la mais en rouge c'est mieux
+
+    - match: '\b(?i)(publi(que|c)|priv[ée]e?|stati(que|c)|abstrait(e)?|final(e)?|prot[ée]g[ée]e?)\b'
+      scope: storage.modifier.algo
+
+    - match: '\b(?i)(herite|implemente?)\b'
+      scope: storage.modifier.extends.algo
+
+    - match: '(?<=(?i)herite)[ \t\n]*(\w+)'
+      scope: entity.other.inherited-class.algo
+
+    - match: '(?<=(?i)implement)[ \t\n]*(\w+)'
+      scope: entity.other.inherited-class.algo
+
+    - match: '(?<=(?i)implemente)[ \t\n]*(\w+)'
+      scope: entity.other.inherited-class.algo
+
 ##-----------------------------------------------types
-    - match: \b((?i)(bool[eé]en|entier|r[eé]el|caract[eè]re|chaine ?de ?caract[eè]res|cha[îi]ne|tableau|nulle|(?<=]) ?de|d\' ?))\b
+    - match: \b((?i)(bool[eé]en|entier|r[eé]el|caract[eè]re|chaine ?de ?caract[eè]res|cha[îi]ne|tableau|(?<=]) ?de|d\'))\b
       scope: storage.type.algo
 
     - match: '\b([A-Z 0-9 _]*)\b'
       scope: constant.language.algo
 
-    - match: '\b(-)?[0-9.]+\b'
+    - match: '\b([∞π]*)\b'
+      scope: constant.language.algo
+
+    - match: '\b(-)?[0-9.e]+\b'
       scope: constant.numeric.algo
-##-----------------------------------------------fonction
-    - match: '\b\w+ *(?=\()'
-      scope: variable.function.algo
-##-----------------------------------------------operateur
-    - match: '\(c\)|©|\b(mod)\b|\b(div)\b|\+|\-|\/|\*|\||√'
-      scope: punctuation.definition.annotation.algo
-
-    #nouveau symbole d'apres le cahier des charges
-    - match: '(\\/¯)|×|\^'
-      scope: punctuation.definition.annotation.algo
-##    - match: '\[|\]|\{\}'
-##      scope: constant.numeric.algo
-
-##-----------------------------------------------Autre
-    - match: ;
-      scope: invalid.illegal
 
 #######################################
 ##              CONTEXT              ##
@@ -125,21 +150,42 @@ contexts:
       pop: true
 
   fonction :
-    - match: '\b[e/s]\b'
-      scope: keyword.operator.assignment.algo
+    - match: '//'
+      scope: punctuation.definition.comment.algo
+      push : line_comment
 
-    - match: '(?<=(e|s)) (.*)(?=(\:))'
-      scope: variable.parameter.algo
+    - match: '/\*'
+      scope: punctuation.definition.comment.algo
+      push : block_comment
 
-    - match: '(?<=(\:))(\ *)(\w+)'
-      scope: storage.type.algo
+    - match: '"'
+      scope: punctuation.definition.string.begin.algo
+      push :  string
+
+    - match: \'
+      scope: punctuation.definition.string.begin.algo
+      push : charactere
 
     - match: '\:'
       scope: keyword.operator.assignment.algo
 
-    - match: \)
+    - match: '(?<=(\:))[ \t\n]*(\w+)'
+      scope: storage.type.algo
+
+    - match: '(?<=(->))[ \t\n]*(\w+)'
+      scope: storage.type.algo
+      ##-----------------------
+
+    - match: '\b[e/s]\b'
+      scope: keyword.operator.assignment.algo
+
+    - match: '(?<=(\be\b|\bs\b))(.*)(?=(\:))'
+      scope: variable.parameter.algo
+
+    - match: \b((?i)(classe|constante|variable|algorithme|d[e,é]but))\b
+      scope: entity.name.tag.algo
       pop  : true
 
-    - match: \b((?i)(constante|variable|algorithme|d[e,é]but))\b
+    - match: '\)'
       scope: entity.name.tag.algo
       pop  : true
